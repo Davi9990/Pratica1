@@ -1,11 +1,29 @@
 <?php
 
-$hostname = "localhost";
-$Nome = "nome"; 
-$Telefone = "telefone";
-$Email = "email";
+class Connect
+{
+    private const HOST = 'localhost';
+    private const DBNAME ='senai';
+    private const USER = 'root';
+    private const PASS = '';
+    private static $instance;
+    private $collection;
+    private static $fail;
 
-$mysqli = new mysqli($hostname, $Nome, $Telefone, $Email);
-if($mysqli->connect_error) {
-    echo "Falha ao conectar: (".$mysqli->connect_errno.")".$mysqli->connect_error;
+    private function __construct()
+    {
+    
+    }
+
+    public static function getConnection(): ?PDO
+    {
+        if(empty(self::$instance)){
+            try{
+                self::$instance = new PDO("mysql:host=".self::HOST.";dbname=".self::DBNAME, self::USER, self::PASS);
+            }catch(\PDOException $exception){
+                self::$fail = $exception;
+            }
+        }
+        return self::$instance;
+    }
 }
