@@ -9,7 +9,7 @@
   <div class="container mx-auto p-4">
     <h1 class="text-3xl font-bold mb-4">Cadastro de Pessoas</h1>
 
-    <form id="cadastroForm">
+    <form id="cadastroForm" action="Interfacedecorno.php" method="post">
       <div class="mb-4">
         <label for="nome" class="block text-sm font-medium text-gray-700">Nome:</label>
         <input type="text" id="nome" name="nome" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
@@ -26,6 +26,14 @@
         Cadastrar
       </button>
     </form>
+
+
+    <?php
+        include 'Connection.php';
+        include 'Pessoas.php';
+
+        $pessoas = Pessoa::listar();
+      ?>
 
     <table class="min-w-full divide-y divide-gray-200 mt-8">
       <thead>
@@ -44,7 +52,22 @@
           </th>
         </tr>
       </thead>
+
+      
       <tbody id="tabelaPessoas">
+        <?php
+          foreach($pessoas as $pessoa){
+        ?>
+          <tr>
+              <tr>
+                <td><?= $pessoa['nome'];?></td>
+                <td><?= $pessoa['telefone'];?></td>
+                <td><?= $pessoa['email'];?></td>
+              </tr>
+          </tr>
+        <?php
+          }
+        ?>
         <tr></tr>
         <tr></tr>
         <tr></tr>

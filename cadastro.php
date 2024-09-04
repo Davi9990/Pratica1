@@ -46,3 +46,4 @@ if(isset($_POST['cadastrar'])){
     
     $pessoa = new Cadastro($nome, $telefone, $email);
 }
+

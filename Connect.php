@@ -3,7 +3,7 @@
 class Connect
 {
     private const HOST = 'localhost';
-    private const DBNAME ='senai';
+    private const DBNAME ='db_cadastro';
     private const USER = 'root';
     private const PASS = '';
     private static $instance;

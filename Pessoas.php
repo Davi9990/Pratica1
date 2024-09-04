@@ -13,14 +13,23 @@ class Pessoa{
         $this->email = $Email;
     }
 
+
     //Metodo de inserir no banco de dados
     public function inserir(): bool{
         //implementar aqui a logica de inserção no banco de dados
-        $pdo = Connect :: getConnection();
-        $ret = $pdo->prepare("INSERT INTO pessoa (nome,telefone,email) VALUES(:nome,:telefone,:email)");
+        $pdo = Connect::getConnection();
+        $ret = $pdo->prepare("INSERT INTO cadastro (nome,telefone,email) VALUES(:nome,:telefone,:email)");
         $ret->bindValue(':nome', $this->nome);
         $ret->bindValue(':telefone', $this->telefone);
         $ret->bindValue(':email', $this->email);
         return $ret->execute(); 
+    }
+
+    //Metodo para listar todos os dados da tabela
+    public static function listar(): array
+    {
+       $pdos = Connect::getConnection();
+       $stmt = $pdos->query("SELECT * FROM cadastro");
+       return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 }
