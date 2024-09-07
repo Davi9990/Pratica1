@@ -29,7 +29,7 @@
 
 
     <?php
-        include 'Connection.php';
+        include 'Connect.php';
         include 'Pessoas.php';
 
         $pessoas = Pessoa::listar();
@@ -47,8 +47,8 @@
           <th class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
             Email
           </th>
-          <th class="px-6 py-3 bg-gray-50">
-            
+          <th class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+            Ação
           </th>
         </tr>
       </thead>
@@ -63,6 +63,8 @@
                 <td><?= $pessoa['nome'];?></td>
                 <td><?= $pessoa['telefone'];?></td>
                 <td><?= $pessoa['email'];?></td>
+                <td><a href = "Interfacedecorno.php?idcadastro=<?= 
+                $pessoa['idcadastro'];?></td>&action=delete">Deletar</a></td>
               </tr>
           </tr>
         <?php

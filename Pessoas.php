@@ -6,7 +6,7 @@ class Pessoa{
     private $telefone;
     private $email;
 
-    public function __construct($Nome,$Telefone,$Email)
+    public function __construct($Nome = null,$Telefone = null,$Email = null) 
     {
         $this->nome = $Nome;
         $this->telefone = $Telefone;
@@ -31,5 +31,12 @@ class Pessoa{
        $pdos = Connect::getConnection();
        $stmt = $pdos->query("SELECT * FROM cadastro");
        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function delete($id): bool{
+        $pdos = Connect::getConnection();
+        $res  = $pdos->prepare("DELETE FROM cadastro WHERE idcadastro = :idcadastro");
+        $res->bindValue(':idcadastro', $id);
+        return $res->execute();
     }
 }
